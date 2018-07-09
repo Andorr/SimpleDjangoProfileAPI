@@ -65,3 +65,4 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
         return self.email
 
+
