@@ -25,7 +25,7 @@ SECRET_KEY = 'i%-htfh2q!=xo(-n*m12c2k2amwiy0adu8lk6yy=ju^v4ls9rz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-18-191-251-187.us-east-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ['ec2-18-191-251-187.us-east-2.compute.amazonaws.com','127.0.0.1']
 
 
 # Application definition
@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'profiles_api',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -124,3 +127,5 @@ STATIC_URL = '/static/'
 
 
 AUTH_USER_MODEL = 'profiles_api.UserProfile'
+
+CORS_ORIGIN_ALLOW_ALL = True

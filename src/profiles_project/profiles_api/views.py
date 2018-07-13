@@ -139,3 +139,16 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
         """Sets the user profile to the logged in user"""
 
         serializer.save(user_profile=self.request.user)
+
+class ProfileMessageViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading, and updating profile feed items"""
+
+    serializer_class = serializers.ProfileMessageSerializer
+    authentication_classes = (TokenAuthentication,)
+    queryset = models.ProfileMessage.objects.all()
+    permission_classes = (permissions.PostOwnMessage, IsAuthenticated)
+
+    def perform_create(self, serializer):
+        """Sets the user profile to the logged in user"""
+
+        serializer.save(user_profile=self.request.user)

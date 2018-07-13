@@ -77,5 +77,19 @@ class ProfileFeedItem(models.Model):
 
         return self.status_text
 
+class ProfileMessage(models.Model):
+    """A message to another profile"""
+
+    to_profile = models.ForeignKey(UserProfile, related_name="receiver_profile", on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, related_name="user_profile", on_delete=models.CASCADE)
+    message = models.CharField(max_length=255)
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """The ProfileMessage as a string"""
+
+        return "From: {} , To: {} , Message: {}".format(self.user_profile, self.to_profile, self.message)
+
+
 
 
