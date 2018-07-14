@@ -162,6 +162,6 @@ class PostViewSet(viewsets.ModelViewSet):
     permissions_classes = (permissions.PostOwnPost, IsAuthenticatedOrReadOnly)
 
     def perform_create(self, serializer):
-        """Sets the user profile to the logged in user"""
+        """Sets the poster to the logged in user"""
 
         serializer.save(poster=self.request.user)

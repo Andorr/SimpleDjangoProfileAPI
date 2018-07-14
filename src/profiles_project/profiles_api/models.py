@@ -100,7 +100,7 @@ class Post(models.Model):
     def __str__(self):
         """The post in form of a string"""
 
-        return "Posted by: {} at {}, Text: {}".format(self.poster, self.text, self.time)
+        return "Posted by: {} at {}, Text: {}".format(self.poster, self.time, self.text)
 
 
 
