@@ -158,7 +158,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializers.PostSerializer
     authentication_classes = (TokenAuthentication,)
-    queryset = models.Post.objects.all()
+    queryset = models.Post.objects.all().order_by('-time')
     permissions_classes = (permissions.PostOwnPost, IsAuthenticatedOrReadOnly)
 
     def perform_create(self, serializer):
