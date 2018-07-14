@@ -45,3 +45,11 @@ class ProfileMessageSerializer(serializers.ModelSerializer):
         fields = ('id', 'user_profile', 'to_profile', 'message', 'time')
         extra_kwargs = {'user_profile': {'read_only': True}}
 
+class PostSerializer(serializers.ModelSerializer):
+    """ A serializer for the posts"""
+
+    class Meta:
+        model = models.Post
+        fields = ('id', 'poster', 'text', 'time')
+        extra_kwargs = {'poster': {'read_only': True}}
+

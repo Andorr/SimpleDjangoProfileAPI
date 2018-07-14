@@ -32,3 +32,14 @@ class PostOwnMessage(permissions.BasePermission):
             return True
 
         return obj.user_profile.id == request.user.id 
+
+class PostOwnPost(permissions.BasePermission):
+    """Allow users to update their own posts"""
+
+    def has_object_permission(self, request, view, obj):
+        """Checks if the user is updating their own post."""
+
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        
+        return obj.poster.id == request.user.id

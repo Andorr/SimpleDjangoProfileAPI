@@ -90,6 +90,18 @@ class ProfileMessage(models.Model):
 
         return "From: {} , To: {} , Message: {}".format(self.user_profile, self.to_profile, self.message)
 
+class Post(models.Model):
+    """A Post created by profiles"""
+
+    poster = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    text = models.CharField(max_length=510)
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """The post in form of a string"""
+
+        return "Posted by: {} at {}, Text: {}".format(self.poster, self.text, self.time)
+
 
 
 

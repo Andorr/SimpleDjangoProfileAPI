@@ -152,3 +152,16 @@ class ProfileMessageViewSet(viewsets.ModelViewSet):
         """Sets the user profile to the logged in user"""
 
         serializer.save(user_profile=self.request.user)
+
+class PostViewSet(viewsets.ModelViewSet):
+    """ Handles creating, reading, and updating posts"""
+
+    serializer_class = serializers.PostSerializer
+    authentication_classes = (TokenAuthentication,)
+    queryset = models.Post.objects.all()
+    permissions_classes = (permissions.PostOwnPost, IsAuthenticatedOrReadOnly)
+
+    def perform_create(self, serializer):
+        """Sets the user profile to the logged in user"""
+
+        serializer.save(poster=self.request.user)
