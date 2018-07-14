@@ -93,7 +93,7 @@ class ProfileMessage(models.Model):
 class Post(models.Model):
     """A Post created by profiles"""
 
-    poster = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    poster = models.ForeignKey(UserProfile, related_name='poster', on_delete=models.CASCADE)
     text = models.CharField(max_length=510)
     time = models.DateTimeField(auto_now_add=True)
 
