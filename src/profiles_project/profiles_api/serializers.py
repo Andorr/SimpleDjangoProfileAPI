@@ -48,7 +48,7 @@ class ProfileMessageSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     """ A serializer for the posts"""
     poster = UserProfileSerializer(read_only=True)
-    likes = serializers.IntegerField()
+    likes = serializers.IntegerField(read_only=True)
     
     class Meta:
         model = models.Post
