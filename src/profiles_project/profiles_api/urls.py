@@ -12,6 +12,7 @@ router.register('login', views.LogInViewSet, base_name='login')
 router.register('feed', views.UserProfileFeedViewSet)
 router.register('message', views.ProfileMessageViewSet)
 router.register('post', views.PostViewSet)
+router.register('like', views.PostLikeViewSet)
 
 urlpatterns = [
     url(r'^hello-view/', views.HelloApiView.as_view()),

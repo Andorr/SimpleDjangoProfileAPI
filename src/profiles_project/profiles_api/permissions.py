@@ -43,3 +43,14 @@ class PostOwnPost(permissions.BasePermission):
             return True
         
         return obj.poster.id == request.user.id
+
+class LikeOwnPost(permissions.BasePermission):
+    """Allow users to update their own likes"""
+
+    def has_object_permission(self, request, view, obj):
+        """Checks if the user is trying to change their own like"""
+
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        
+        return obj.user.id == request.user.id

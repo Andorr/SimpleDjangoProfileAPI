@@ -159,9 +159,22 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PostSerializer
     authentication_classes = (TokenAuthentication,)
     queryset = models.Post.objects.all().order_by('-time')
-    permissions_classes = (permissions.PostOwnPost, IsAuthenticatedOrReadOnly)
+    permissions_classes = (permissions.PostOwnPost, IsAuthenticated)
 
     def perform_create(self, serializer):
         """Sets the poster to the logged in user"""
 
         serializer.save(poster=self.request.user)
+
+class PostLikeViewSet(viewsets.ModelViewSet):
+    """ Handles creating, reading, and updating post likes"""
+
+    serializer_class = serializers.PostLikeSerializer
+    authentication_classes = (TokenAuthentication,)
+    queryset = models.PostLike.objects.all()
+    permissions_classes = (permissions.LikeOwnPost, IsAuthenticated)
+
+    def perform_create(self, serializer):
+        """ Set the post like to the logged in user"""
+
+        serializer.save(user=self.request.user)

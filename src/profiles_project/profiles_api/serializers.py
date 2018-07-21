@@ -48,9 +48,21 @@ class ProfileMessageSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     """ A serializer for the posts"""
     poster = UserProfileSerializer(read_only=True)
-
+    likes = serializers.IntegerField()
+    
     class Meta:
         model = models.Post
-        fields = ('id', 'text', 'time', 'poster')
+        fields = ('id', 'text', 'time', 'poster', 'likes')
+
+
+class PostLikeSerializer(serializers.ModelSerializer):
+    """ A serializer for liking of posts"""
+
+    user = UserProfileSerializer(read_only=True)
+
+    class Meta:
+        model = models.PostLike
+        fields = ('id', 'post', 'user',)
+        unique_together = ('post', 'user')
        
 

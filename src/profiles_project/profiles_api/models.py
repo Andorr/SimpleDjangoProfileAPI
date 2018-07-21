@@ -97,10 +97,25 @@ class Post(models.Model):
     text = models.CharField(max_length=510)
     time = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def likes(self):
+        return PostLike.objects.filter(post=self).count()
+
     def __str__(self):
         """The post in form of a string"""
 
         return "Posted by: {} at {}, Text: {}".format(self.poster, self.time, self.text)
+
+class PostLike(models.Model):
+    """A model to store likes of post from different users"""
+
+    user = models.ForeignKey(UserProfile, related_name='user')
+    post = models.ForeignKey(Post, related_name='post', on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+
+        return "User: {} likes post {}".format(self.user, self.post)
 
 
 
